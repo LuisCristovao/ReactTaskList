@@ -3,17 +3,25 @@ import { useState } from "react";
 interface NewTaskProps {
   tasks: string[];
   setTasks: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedIndex: number | null;
+  listRefs: React.MutableRefObject<(HTMLLIElement | null)[]>;
 }
 
-const NewTaskComponent: React.FC<NewTaskProps> = ({ tasks, setTasks }) => {
+const NewTaskComponent: React.FC<NewTaskProps> = ({ tasks, setTasks, selectedIndex, listRefs }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTask, setNewTask] = useState("");
 
   return (
     <li
-      key={tasks.length + 1}
-      className="cool-list"
+      key={tasks.length}
+      className={`cool-list ${selectedIndex === tasks.length ? "selected" : ""}`}
       style={isEditing ? { backgroundColor: "#1a1a1a", cursor: "default" } : {}}
+      ref={(el) => {
+        if (el) {
+          listRefs.current[tasks.length] = el; // Store reference
+        }
+      }}
+      
       onClick={() => setIsEditing(true)}
     >
       {isEditing ? (

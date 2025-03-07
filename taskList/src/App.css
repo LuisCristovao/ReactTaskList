@@ -51,3 +51,8 @@
   outline: none; /* Remove default blue outline */
   font-family: inherit; /* Inherit font style */
 }
+
+/* Highlight selected item when using keyboard */
+.cool-list .selected {
+  background-color: gray !important;
+}
