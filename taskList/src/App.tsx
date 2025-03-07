@@ -16,8 +16,6 @@ function App() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null); // Tracks highlighted item
   const listRefs = useRef<(HTMLLIElement | null)[]>([]);
 
-  
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (tasks.length === 0) return; // Prevent key actions when list is empty
@@ -42,6 +40,10 @@ function App() {
 
       if (e.key === "Enter" && selectedIndex !== null) {
         listRefs.current[selectedIndex]?.click(); // Trigger click event of selected item
+      }
+
+      if (e.key === "Escape" && selectedIndex !== null) {
+        setSelectedIndex(null)
       }
     };
 
