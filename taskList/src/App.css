@@ -1,42 +1,32 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 50vh; /* Full viewport height */
+  margin: 0;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cool-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the list items */
+  justify-content: center; /* Center horizontally */
+  list-style: none; /* Remove default bullets */
+  padding: 0;
+  margin: 10;
+  min-width: 50%;
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 1s linear;
-  }
+.cool-list li {
+  color: white; /* White text */
+  padding: 8px;
+  border: 1px solid white; /* White border for each item */
+  margin: 3px; /* Space between items */
+  border-radius: 3px; /* Slightly rounded corners */
+  
 }
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
-}
