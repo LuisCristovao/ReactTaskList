@@ -4,7 +4,7 @@ interface NewTaskProps {
   tasks: string[];
   setTasks: React.Dispatch<React.SetStateAction<string[]>>;
   selectedIndex: number | null;
-  listRefs: React.MutableRefObject<(HTMLLIElement | null)[]>;
+  listRefs: React.RefObject<(HTMLLIElement | null)[]>;
 }
 
 const NewTaskComponent: React.FC<NewTaskProps> = ({ tasks, setTasks, selectedIndex, listRefs }) => {

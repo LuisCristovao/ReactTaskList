@@ -1,7 +1,7 @@
 interface ListComponentProps {
     tasks: string[];
     selectedIndex: number | null;
-    listRefs: React.MutableRefObject<(HTMLLIElement | null)[]>;
+    listRefs: React.RefObject<(HTMLLIElement | null)[]>;
   }
   
   const ListComponent: React.FC<ListComponentProps> = ({ tasks, selectedIndex, listRefs }) => {
