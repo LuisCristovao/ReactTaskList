@@ -3,7 +3,7 @@
   flex-direction: column; /* Stack items vertically */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  height: 50vh; /* Full viewport height */
+  min-height: 50vh; /* Full viewport height */
   margin: 0;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
@@ -26,7 +26,12 @@
   border: 1px solid white; /* White border for each item */
   margin: 3px; /* Space between items */
   border-radius: 3px; /* Slightly rounded corners */
-  
+  transition: background-color 0.5s ease-in-out;
 }
 
 
+/* Hover effect */
+.cool-list li:hover {
+  background-color: gray;
+  cursor: pointer;
+}

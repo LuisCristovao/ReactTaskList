@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const list_class = "cool-list";
-  const tasks = ["1", "2", "333"];
+  let tasks = ["1", "2", "333"];
   // State to track which list item is hovered
   const [listIndex, setlistIndex] = useState<number | null>(null);
 
@@ -24,6 +24,21 @@ function App() {
             {task}
           </li>
         ))}
+        <li key={tasks.length + 1} className={list_class} 
+          onClick={(event)=>{
+            console.log(event)
+            const clickedElement = event.target as HTMLElement; // TypeScript-safe cast
+            clickedElement.innerHTML="<input id='new_task' type='text' autoFocus/>"
+          }}
+          onBlur={(event)=>{
+            
+            const clickedElement = event.target as HTMLElement; // TypeScript-safe cast
+            console.log(clickedElement.innerText)
+            
+          }}
+        >
+          +
+        </li>
       </ul>
     </>
   );
