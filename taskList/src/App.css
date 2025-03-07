@@ -30,8 +30,24 @@
 }
 
 
+
 /* Hover effect */
 .cool-list li:hover {
   background-color: gray;
   cursor: pointer;
+}
+
+
+/* Style the input to match the <li> */
+.cool-list input {
+  width: 90%; /* Make input same width as <li> */
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  background-color: #1a1a1a; /* Match background */
+  color: white; /* Match text color */
+  font-size: 16px; /* Match font size */
+  text-align: center;
+  outline: none; /* Remove default blue outline */
+  font-family: inherit; /* Inherit font style */
 }
