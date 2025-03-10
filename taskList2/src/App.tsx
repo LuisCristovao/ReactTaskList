@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import ListComponent from "./components/ListComponent";
+import TaskInputComponent from "./components/taskInputComponent";
 
 function App() {
   const [tasks, setTasks] = useState(["sssss", "aaaa", "oooooo"]);
@@ -20,32 +21,13 @@ function App() {
       <h1>Tasks</h1>
       <ul className="cool-list">
         <ListComponent tasks={tasks} />
-
-        {/* Clickable + button that turns into an input */}
-        {isAdding ? (
-          <li className="cool-list">
-            <input
-              id="new-task"
-              type="text"
-              value={newTask}
-              autoFocus
-              onChange={(e) => setNewTask(e.target.value)}
-              onBlur={addTask}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  addTask();
-                }
-              }}
-            />
-          </li>
-        ) : (
-          <li
-            className="cool-list"
-            onClick={() => setIsAdding(true)} // Show input on click
-          >
-            +
-          </li>
-        )}
+        <TaskInputComponent
+          newTask={newTask}
+          setNewTask={setNewTask}
+          isAdding={isAdding}
+          setIsAdding={setIsAdding}
+          addTask={addTask}
+        />
       </ul>
     </>
   );
