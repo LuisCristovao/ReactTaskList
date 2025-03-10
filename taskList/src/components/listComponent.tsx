@@ -5,6 +5,7 @@ interface ListComponentProps {
   }
   
   const ListComponent: React.FC<ListComponentProps> = ({ tasks, selectedIndex, listRefs }) => {
+
     return (
       <>
         {tasks.map((task, index) => (
@@ -16,6 +17,7 @@ interface ListComponentProps {
                     listRefs.current[index] = el
                 }
             }} // Store reference to each list item
+            onMouseOver={()=>{console.log(task,index)}}
           >
             {task}
           </li>
