@@ -7,6 +7,7 @@ interface LIComponentProps {
 
 const LIComponent: React.FC<LIComponentProps> = ({ task, index }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [newTask, setNewTask] = useState(task);
 
   return (
     <>
@@ -22,11 +23,15 @@ const LIComponent: React.FC<LIComponentProps> = ({ task, index }) => {
           {task}
         </li>
       ) : (
-        <li
-          key={index}
-          className="cool-list"
-        >
-          {task}
+        <li key={index} className="cool-list">
+          <input
+            autoFocus
+            type="text"
+            onChange={(e) => {
+              setNewTask(e.target.value);
+            }}
+            onBlur={()=>{setIsEditing(false)}}
+          />
         </li>
       )}
     </>
