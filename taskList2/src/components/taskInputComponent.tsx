@@ -1,20 +1,18 @@
-import React from "react";
+import { useState } from "react";
 
 interface TaskInputProps {
   newTask: string;
   setNewTask: React.Dispatch<React.SetStateAction<string>>;
-  isAdding: boolean;
-  setIsAdding: React.Dispatch<React.SetStateAction<boolean>>;
   addTask: () => void;
 }
 
 const TaskInputComponent: React.FC<TaskInputProps> = ({
   newTask,
   setNewTask,
-  isAdding,
-  setIsAdding,
   addTask,
 }) => {
+  const [isAdding, setIsAdding] = useState(false); // Control input visibility
+
   return isAdding ? (
     <li className="cool-list">
       <input
@@ -23,10 +21,14 @@ const TaskInputComponent: React.FC<TaskInputProps> = ({
         value={newTask}
         autoFocus
         onChange={(e) => setNewTask(e.target.value)}
-        onBlur={addTask}
+        onBlur={()=>{
+            addTask()
+            setIsAdding(false)
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             addTask();
+            setIsAdding(false)
           }
         }}
       />
