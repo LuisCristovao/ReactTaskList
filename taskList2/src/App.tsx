@@ -1,12 +1,10 @@
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import ListComponent from "./components/ListComponent";
 import TaskInputComponent from "./components/taskInputComponent";
 
 function App() {
-  
   const [newTask, setNewTask] = useState(""); // Track input state
-  
 
   const [tasks, setTasks] = useState<string[]>(() => {
     const storedTasks = localStorage.getItem("tasks");
@@ -17,7 +15,6 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-
   const addTask = () => {
     if (newTask.trim() !== "") {
       setTasks([...tasks, newTask]); // Add task to array
@@ -25,8 +22,18 @@ function App() {
     setNewTask(""); // Reset input
   };
 
-
-
+  const updateTask = (index: number, updatedTask: string) => {
+    setTasks((prevTasks) => {
+      // Calls React's setTasks function
+      const newTasks = [...prevTasks]; // Creates a new array (immutability)
+      newTasks[index] = updatedTask; // Updates only the specific task
+      return newTasks; // Returns the updated array
+    });
+  };
+  // Delete a task by index
+  const deleteTask = (index: number) => {
+    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index)); // Remove task at index
+  };
 
   return (
     <>
