@@ -6,7 +6,7 @@ import TaskInputComponent from "./components/taskInputComponent";
 function App() {
   
   const [newTask, setNewTask] = useState(""); // Track input state
-  const [isAdding, setIsAdding] = useState(false); // Control input visibility
+  
 
   const [tasks, setTasks] = useState<string[]>(() => {
     const storedTasks = localStorage.getItem("tasks");
@@ -23,12 +23,11 @@ function App() {
       setTasks([...tasks, newTask]); // Add task to array
     }
     setNewTask(""); // Reset input
-    setIsAdding(false); // Hide input
   };
 
 
 
-  
+
   return (
     <>
       <h1>Tasks</h1>
@@ -37,8 +36,6 @@ function App() {
         <TaskInputComponent
           newTask={newTask}
           setNewTask={setNewTask}
-          isAdding={isAdding}
-          setIsAdding={setIsAdding}
           addTask={addTask}
         />
       </ul>
