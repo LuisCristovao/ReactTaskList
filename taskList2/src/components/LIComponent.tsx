@@ -20,7 +20,7 @@ const LIComponent: React.FC<LIComponentProps> = ({ task, index }) => {
             setIsEditing(true);
           }}
         >
-          {task}
+          {newTask}
         </li>
       ) : (
         <li key={index} className="cool-list">
@@ -31,6 +31,7 @@ const LIComponent: React.FC<LIComponentProps> = ({ task, index }) => {
               setNewTask(e.target.value);
             }}
             onBlur={()=>{setIsEditing(false)}}
+            value={newTask}
           />
         </li>
       )}
