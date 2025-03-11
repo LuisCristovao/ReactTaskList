@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import "./App.css";
 import ListComponent from "./components/ListComponent";
 import TaskInputComponent from "./components/taskInputComponent";
 
 function App() {
-  const [tasks, setTasks] = useState(["sssss", "aaaa", "oooooo"]);
+  
   const [newTask, setNewTask] = useState(""); // Track input state
   const [isAdding, setIsAdding] = useState(false); // Control input visibility
+
+  const [tasks, setTasks] = useState<string[]>(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    return storedTasks ? JSON.parse(storedTasks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
 
   const addTask = () => {
     if (newTask.trim() !== "") {
@@ -16,6 +26,9 @@ function App() {
     setIsAdding(false); // Hide input
   };
 
+
+
+  
   return (
     <>
       <h1>Tasks</h1>
