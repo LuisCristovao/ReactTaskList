@@ -3,9 +3,11 @@ import { useState } from "react";
 interface LIComponentProps {
   task: string;
   index: number;
+  updateTask:(index:number,updatedTask:string)=>void,
+  deleteTask: (index: number)=>void
 }
 
-const LIComponent: React.FC<LIComponentProps> = ({ task, index }) => {
+const LIComponent: React.FC<LIComponentProps> = ({ task, index,updateTask, deleteTask }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTask, setNewTask] = useState(task);
 
@@ -29,6 +31,7 @@ const LIComponent: React.FC<LIComponentProps> = ({ task, index }) => {
             type="text"
             onChange={(e) => {
               setNewTask(e.target.value);
+              updateTask(index,e.target.value)
             }}
             onBlur={()=>{setIsEditing(false)}}
             value={newTask}
