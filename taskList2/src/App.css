@@ -15,9 +15,6 @@
   justify-content: center; /* Center horizontally */
   list-style: none; /* Remove default bullets */
   padding: 0;
-  margin: 10;
-  max-width: 50%;
-  min-width: 80%;
   white-space: pre-wrap; /* This will preserve newlines and other whitespace */
   
 }
@@ -43,6 +40,13 @@
   margin: 3px; /* Space between items */
   border-radius: 3px; /* Slightly rounded corners */
   transition: background-color 0.5s ease-in-out;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical; /* Make sure the lines are stacked vertically */
+  overflow: hidden; /* Hide any text that overflows */
+  text-overflow: ellipsis; /* Add ellipsis (…) for the overflowing text */
+  text-align: center;
 }
 
 
