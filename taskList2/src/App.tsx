@@ -39,7 +39,11 @@ function App() {
     <>
       <h1>Tasks</h1>
       <ul className="cool-list">
-        <ListComponent tasks={tasks} />
+        <ListComponent 
+          tasks={tasks} 
+          updateTask={updateTask}
+          deleteTask={deleteTask}
+        />
         <TaskInputComponent
           newTask={newTask}
           setNewTask={setNewTask}

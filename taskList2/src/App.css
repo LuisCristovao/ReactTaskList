@@ -16,8 +16,24 @@
   list-style: none; /* Remove default bullets */
   padding: 0;
   margin: 10;
-  min-width: 50%;
+  max-width: 50%;
+  min-width: 80%;
+  white-space: pre-wrap; /* This will preserve newlines and other whitespace */
   
+}
+@media (min-width: 768px) {
+  .cool-list {
+    max-width: 50%; /* 50% max width for desktop */
+    min-width: 50%; /* Set min-width to 50% for larger screens */
+  }
+}
+
+/* Media query for smaller screens like phones */
+@media (max-width: 767px) {
+  .cool-list {
+    max-width: 80%; /* 80% max width for smaller screens */
+    min-width: 80%; /* 80% min width for smaller screens */
+  }
 }
 
 .cool-list li {

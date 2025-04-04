@@ -26,9 +26,12 @@ const LIComponent: React.FC<LIComponentProps> = ({ task, index,updateTask, delet
         </li>
       ) : (
         <li key={index} className="cool-list">
-          <input
+          <textarea
             autoFocus
-            type="text"
+            style={{
+              width:"100%",
+              height:"100%"
+            }}
             onChange={(e) => {
               setNewTask(e.target.value);
               updateTask(index,e.target.value)
