@@ -73,12 +73,30 @@ const LIComponent: React.FC<LIComponentProps> = ({
             }}
             onClick={(e) => {
               e.stopPropagation(); // Prevent click from bubbling up
-              deleteTask(index);   // Delete the task
+              //deleteTask(index);   // Delete the task
               setIsEditing(false); // Exit editing mode
             }}
             onMouseDown={(e) => e.preventDefault()} // Prevent focus shift before click
           >
             &#x2714; {/* Check mark symbol */}
+          </button>
+          <button
+            style={{
+              backgroundColor: "black",
+              border: "white solid 1px",
+              fontSize: "24px",
+              cursor: "pointer",
+              marginLeft:"10px"
+              
+            }}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent click from bubbling up
+              deleteTask(index);   // Delete the task
+              setIsEditing(false); // Exit editing mode
+            }}
+            onMouseDown={(e) => e.preventDefault()} // Prevent focus shift before click
+          >
+            🗑️ {/* trash symbol */}
           </button>
         </li>
         
