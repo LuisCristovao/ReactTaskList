@@ -1,4 +1,4 @@
-import { useState, useRef,useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface LIComponentProps {
   task: string;
@@ -48,7 +48,7 @@ const LIComponent: React.FC<LIComponentProps> = ({
       ) : (
         <li key={index} className="cool-list">
           <textarea
-            ref={textareaRef}  // Assign the ref to the textarea
+            ref={textareaRef} // Assign the ref to the textarea
             autoFocus
             style={{
               width: "100%",
@@ -57,15 +57,31 @@ const LIComponent: React.FC<LIComponentProps> = ({
             onChange={(e) => {
               setNewTask(e.target.value);
               updateTask(index, e.target.value);
-              
             }}
-            
             onBlur={() => {
               setIsEditing(false);
             }}
             value={newTask}
           />
+          <button
+            style={{
+              backgroundColor: "black",
+              border: "white solid 1px",
+              fontSize: "24px",
+              cursor: "pointer",
+              color: "green", // Style for the check mark button
+            }}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent click from bubbling up
+              deleteTask(index);   // Delete the task
+              setIsEditing(false); // Exit editing mode
+            }}
+            onMouseDown={(e) => e.preventDefault()} // Prevent focus shift before click
+          >
+            &#x2714; {/* Check mark symbol */}
+          </button>
         </li>
+        
       )}
     </>
   );
