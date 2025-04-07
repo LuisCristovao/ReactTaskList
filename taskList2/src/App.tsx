@@ -23,16 +23,18 @@ function App() {
   };
 
   const updateTask = (index: number, updatedTask: string) => {
-    setTasks((prevTasks) => {
-      // Calls React's setTasks function
-      const newTasks = [...prevTasks]; // Creates a new array (immutability)
+    
+      const newTasks = [...tasks]; // Creates a new array (immutability)
       newTasks[index] = updatedTask; // Updates only the specific task
+      setTasks(newTasks)
       return newTasks; // Returns the updated array
-    });
+    
   };
   // Delete a task by index
   const deleteTask = (index: number) => {
-    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index)); // Remove task at index
+    const newTasks= tasks.filter((_, i) => i !== index); // Remove task at index
+    setTasks(newTasks)
+    return newTasks
   };
 
   return (
