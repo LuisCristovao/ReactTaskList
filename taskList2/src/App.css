@@ -16,8 +16,8 @@
   list-style: none; /* Remove default bullets */
   padding: 0;
   white-space: pre-wrap; /* This will preserve newlines and other whitespace */
-  
 }
+
 @media (min-width: 768px) {
   .cool-list {
     max-width: 50%; /* 50% max width for desktop */
@@ -40,23 +40,27 @@
   margin: 3px; /* Space between items */
   border-radius: 3px; /* Slightly rounded corners */
   transition: background-color 0.5s ease-in-out;
-
   display: -webkit-box;
   -webkit-line-clamp: 3; /* Limit to 3 lines */
   -webkit-box-orient: vertical; /* Make sure the lines are stacked vertically */
   overflow: hidden; /* Hide any text that overflows */
   text-overflow: ellipsis; /* Add ellipsis (…) for the overflowing text */
   text-align: center;
+  font-size: 20px; /* Default font size for desktop */
 }
 
-
+/* Increase font size on mobile for li elements */
+@media (max-width: 767px) {
+  .cool-list li {
+    font-size: 25px; /* Larger font size for mobile */
+  }
+}
 
 /* Hover effect */
 .cool-list li:hover {
   background-color: gray;
   cursor: pointer;
 }
-
 
 /* Style the input to match the <li> */
 .cool-list input {
@@ -66,9 +70,33 @@
   border-radius: 3px;
   background-color: #1a1a1a; /* Match background */
   color: white; /* Match text color */
-  font-size: 16px; /* Match font size */
+  font-size: 16px; /* Default font size for desktop */
   text-align: center;
   outline: none; /* Remove default blue outline */
   font-family: inherit; /* Inherit font style */
 }
 
+/* Add textarea styling */
+.cool-list textarea {
+  width: 90%; /* Match input width */
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  background-color: #1a1a1a; /* Match background */
+  color: white; /* Match text color */
+  font-size: 20px; /* Default font size for desktop */
+ 
+  outline: none; /* Remove default outline */
+  font-family: inherit; /* Inherit font style */
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+/* Mobile font size adjustments for input and textarea */
+@media (max-width: 767px) {
+  .cool-list input {
+    font-size: 25px; /* Larger font size for mobile */
+  }
+  .cool-list textarea {
+    font-size: 25px; /* Larger font size for mobile */
+  }
+}

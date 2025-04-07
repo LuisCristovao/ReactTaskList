@@ -13,7 +13,7 @@ const ListComponent: React.FC<ListComponentProps> = ({ tasks,updateTask,deleteTa
     <>
       {tasks.map((task, index) => (
         <LIComponent 
-            key={`__${index}`}
+            key={index}
             task={task}
             index={index}
             updateTask={updateTask}
