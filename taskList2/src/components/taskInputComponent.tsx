@@ -38,6 +38,24 @@ const TaskInputComponent: React.FC<TaskInputProps> = ({
         
         value={newTask}
       />
+      <button
+            style={{
+              backgroundColor: "black",
+              border: "white solid 1px",
+              fontSize: "24px",
+              cursor: "pointer",
+              color: "green", // Style for the check mark button
+            }}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent click from bubbling up
+              addTask();
+              setIsAdding(false); // Exit editing mode
+            }}
+            onMouseDown={(e) => e.preventDefault()} // Prevent focus shift before click
+          >
+             &#x2714; {/* Check mark symbol */}
+          </button>
+      
       
     </li>
   ) : (

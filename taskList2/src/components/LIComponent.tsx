@@ -36,9 +36,9 @@ const LIComponent: React.FC<LIComponentProps> = ({
     <>
       {!isEditing ? (
         <li
-          key={index}
+          
           className="cool-list"
-          onMouseOver={() => console.log(task, index)}
+          //onMouseOver={() => console.log(task, index)}
           onClick={() => {
             setIsEditing(true);
           }}
@@ -46,7 +46,7 @@ const LIComponent: React.FC<LIComponentProps> = ({
           {newTask}
         </li>
       ) : (
-        <li key={index} className="cool-list">
+        <li  className="cool-list">
           <textarea
             ref={textareaRef} // Assign the ref to the textarea
             autoFocus

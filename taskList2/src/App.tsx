@@ -34,6 +34,7 @@ function App() {
   const deleteTask = (index: number) => {
     const newTasks= tasks.filter((_, i) => i !== index); // Remove task at index
     setTasks(newTasks)
+    //console.log(newTasks)
     return newTasks
   };
 
