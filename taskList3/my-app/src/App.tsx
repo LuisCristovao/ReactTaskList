@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 
-type Task = {
+interface Task {
   id: number;
   text: string;
   isEditing: boolean;
