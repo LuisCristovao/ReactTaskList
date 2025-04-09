@@ -8,6 +8,9 @@ interface LIComponentProps {
   onDragStart?: (e: React.DragEvent<HTMLLIElement>) => void;
   onDragOver?: (e: React.DragEvent<HTMLLIElement>) => void;
   onDrop?: (e: React.DragEvent<HTMLLIElement>) => void;
+  onTouchStart?: () => void;
+  onTouchMove?: (e: React.TouchEvent<HTMLLIElement>) => void;
+  onTouchEnd?: (e: React.TouchEvent<HTMLLIElement>) => void;
 }
 
 const LIComponent: React.FC<LIComponentProps> = ({
@@ -18,6 +21,9 @@ const LIComponent: React.FC<LIComponentProps> = ({
   onDragStart,
   onDragOver,
   onDrop,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTask, setNewTask] = useState(task);
@@ -48,10 +54,14 @@ const LIComponent: React.FC<LIComponentProps> = ({
           onDragStart={onDragStart}
           onDragOver={onDragOver}
           onDrop={onDrop}
-          //onMouseOver={() => console.log(task, index)}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          // onMouseOver={() => console.log( index)}
           onClick={() => {
             setIsEditing(true);
           }}
+          data-index={index}
         >
           {newTask}
         </li>

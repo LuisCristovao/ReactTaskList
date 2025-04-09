@@ -48,6 +48,7 @@ function App() {
     newTasks.splice(endIndex, 0, removed);
     // Update state
     setTasks(newTasks);
+    window.location.reload()
   };
 
   return (
