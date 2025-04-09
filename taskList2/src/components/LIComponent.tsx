@@ -5,12 +5,12 @@ interface LIComponentProps {
   index: number;
   updateTask: (index: number, updatedTask: string) => void;
   deleteTask: (index: number) => void;
-  onDragStart?: (e: React.DragEvent<HTMLLIElement>) => void;
+  onDragStart?: () => void;
   onDragOver?: (e: React.DragEvent<HTMLLIElement>) => void;
   onDrop?: (e: React.DragEvent<HTMLLIElement>) => void;
   onTouchStart?: () => void;
   onTouchMove?: (e: React.TouchEvent<HTMLLIElement>) => void;
-  onTouchEnd?: (e: React.TouchEvent<HTMLLIElement>) => void;
+  onTouchEnd?: () => void;
 }
 
 const LIComponent: React.FC<LIComponentProps> = ({

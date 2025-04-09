@@ -23,7 +23,6 @@ const ListComponent: React.FC<ListComponentProps> = ({
 
   // Save index of the item on drag start
   const handleDragStart = (
-    e: React.DragEvent<HTMLLIElement>,
     index: number
   ) => {
     setDraggedIndex(index);
@@ -67,7 +66,7 @@ const ListComponent: React.FC<ListComponentProps> = ({
     currentIndex=parseInt(index)
   };
 
-  const handleTouchEnd = (e: React.TouchEvent<HTMLLIElement>) => {
+  const handleTouchEnd = () => {
 
   
     if(currentIndex===null || currentIndex===undefined) return;
@@ -88,13 +87,13 @@ const ListComponent: React.FC<ListComponentProps> = ({
             index={index}
             updateTask={updateTask}
             deleteTask={deleteTask}
-            onDragStart={(e) => handleDragStart(e, index)}
+            onDragStart={() => handleDragStart(index)}
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, index)}
             // Mobile drag events 👇
             onTouchStart={() => handleTouchStart(index)}
             onTouchMove={(e) => handleTouchMove(e)}
-            onTouchEnd={(e) => handleTouchEnd(e)}
+            onTouchEnd={handleTouchEnd}
           />
         );
       })}
