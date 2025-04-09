@@ -59,8 +59,12 @@ const TaskInputComponent: React.FC<TaskInputProps> = ({
       
     </li>
   ) : (
-    <li className="cool-list" onClick={() => setIsAdding(true)}>
-      +
+    <li 
+    className="cool-list"
+     onClick={() => setIsAdding(true)}
+     style={{border:"5px solid white"}}
+     >
+      + Add task
     </li>
   );
 };

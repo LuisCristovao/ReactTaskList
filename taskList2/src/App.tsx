@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    
   }, [tasks]);
 
   const addTask = () => {
@@ -24,35 +23,33 @@ function App() {
   };
 
   const updateTask = (index: number, updatedTask: string) => {
-    
-      const newTasks = [...tasks]; // Creates a new array (immutability)
-      newTasks[index] = updatedTask; // Updates only the specific task
-      setTasks(newTasks)
-      return newTasks; // Returns the updated array
-    
+    const newTasks = [...tasks]; // Creates a new array (immutability)
+    newTasks[index] = updatedTask; // Updates only the specific task
+    setTasks(newTasks);
+    return newTasks; // Returns the updated array
   };
   // Delete a task by index
   const deleteTask = (index: number) => {
-    const newTasks= tasks.filter((_, i) => i !== index); // Remove task at index
-    setTasks(newTasks)
-    window.location.reload()
+    const newTasks = tasks.filter((_, i) => i !== index); // Remove task at index
+    setTasks(newTasks);
+    window.location.reload();
     //console.log(newTasks)
-    return newTasks
+    return newTasks;
   };
 
   return (
     <>
       <h1>Tasks</h1>
       <ul className="cool-list">
-        <ListComponent 
-          tasks={tasks} 
-          updateTask={updateTask}
-          deleteTask={deleteTask}
-        />
         <TaskInputComponent
           newTask={newTask}
           setNewTask={setNewTask}
           addTask={addTask}
+        />
+        <ListComponent
+          tasks={tasks}
+          updateTask={updateTask}
+          deleteTask={deleteTask}
         />
       </ul>
     </>
