@@ -1,134 +1,124 @@
-import React, { useEffect, useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, ChangeEvent, FC } from 'react';
 
 interface Task {
   id: number;
   text: string;
 }
 
-function App() {
+interface TaskInputProps {
+  input: string;
+  setInput: (value: string) => void;
+  addTask: () => void;
+}
+
+interface TaskItemProps {
+  task: Task;
+  removeTask: (id: number) => void;
+}
+
+interface TaskListProps {
+  tasks: Task[];
+  removeTask: (id: number) => void;
+}
+
+const styles = {
+  appContainer: {
+    maxWidth: '400px',
+    margin: '0 auto',
+    padding: '1rem'
+  },
+  title: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1rem'
+  },
+  inputContainer: {
+    display: 'flex',
+    gap: '0.5rem',
+    marginBottom: '1rem'
+  },
+  input: {
+    flex: 1,
+    padding: '0.5rem'
+  },
+  addButton: {
+    padding: '0.5rem 1rem'
+  },
+  taskList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem'
+  },
+  taskItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0.5rem',
+    border: '1px solid #ccc',
+    borderRadius: '0.25rem'
+  },
+  deleteButton: {
+    background: 'none',
+    border: 'none',
+    color: 'red',
+    cursor: 'pointer'
+  }
+};
+
+const TaskInput: FC<TaskInputProps> = ({ input, setInput, addTask }) => (
+  <div style={styles.inputContainer}>
+    <input
+      value={input}
+      onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
+      placeholder="Enter a new task"
+      style={styles.input}
+    />
+    <button onClick={addTask} style={styles.addButton}>Add</button>
+  </div>
+);
+
+const TaskItem: FC<TaskItemProps> = ({ task, removeTask }) => (
+  <div style={styles.taskItem}>
+    <span>{task.text}</span>
+    <button
+      onClick={() => removeTask(task.id)}
+      style={styles.deleteButton}
+    >
+      &#128465;
+    </button>
+  </div>
+);
+
+const TaskList: FC<TaskListProps> = ({ tasks, removeTask }) => (
+  <div style={styles.taskList}>
+    {tasks.map(task => (
+      <TaskItem key={task.id} task={task} removeTask={removeTask} />
+    ))}
+  </div>
+);
+
+const TaskApp: FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTaskText, setNewTaskText] = useState('');
-  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
-  const [editingText, setEditingText] = useState('');
+  const [input, setInput] = useState<string>('');
 
-  // Load tasks from localStorage on app mount
-  useEffect(() => {
-    const storedTasks = localStorage.getItem('my-tasks');
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
+  const addTask = () => {
+    if (input.trim() !== '') {
+      setTasks([...tasks, { id: Date.now(), text: input }]);
+      setInput('');
     }
-  }, []);
-
-  // Whenever tasks change, store them in localStorage
-  useEffect(() => {
-    localStorage.setItem('my-tasks', JSON.stringify(tasks));
-  }, [tasks]);
-
-  // Handle changes in the "new task" text area
-  const handleNewTaskChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewTaskText(event.target.value);
   };
 
-  // Add a new task
-  const handleAddTask = () => {
-    if (!newTaskText.trim()) return;
-    const newTask: Task = {
-      id: Date.now(),
-      text: newTaskText.trim(),
-    };
-    setTasks(prev => [...prev, newTask]);
-    setNewTaskText('');
-  };
-
-  // Start editing a task
-  const handleStartEditing = (task: Task) => {
-    setEditingTaskId(task.id);
-    setEditingText(task.text);
-  };
-
-  // Handle changes in the editing text area
-  const handleEditingTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setEditingText(event.target.value);
-  };
-
-  // Stop editing (save changes)
-  const handleStopEditing = () => {
-    if (editingTaskId === null) return;
-    setTasks(prev =>
-      prev.map(task =>
-        task.id === editingTaskId
-          ? { ...task, text: editingText }
-          : task
-      )
-    );
-    setEditingTaskId(null);
-    setEditingText('');
-  };
-
-  // Delete task
-  const handleDeleteTask = (event: MouseEvent, taskId: number) => {
-    event.stopPropagation(); 
-    setTasks(prev => prev.filter(t => t.id !== taskId));
+  const removeTask = (id: number) => {
+    setTasks(tasks.filter(task => task.id !== id));
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '30px auto', padding: '20px', border: '1px solid #ccc' }}>
-      <h1>Task List</h1>
-
-      {/* Text area to create a new task */}
-      <div style={{ marginBottom: '1rem' }}>
-        <h3>Add new task:</h3>
-        <textarea
-          placeholder="Type a new task here (multiline)..."
-          value={newTaskText}
-          onChange={handleNewTaskChange}
-          rows={3}
-          style={{ width: '100%', marginBottom: '8px' }}
-        />
-        <br />
-        <button onClick={handleAddTask}>Add Task</button>
-      </div>
-
-      {/* List of tasks */}
-      <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
-        {tasks.map(task => (
-          <li
-            key={task.id}
-            style={{
-              border: '1px solid #999',
-              padding: '8px',
-              marginBottom: '8px',
-              cursor: 'pointer'
-            }}
-            onClick={() => handleStartEditing(task)}
-          >
-            {editingTaskId === task.id ? (
-              <div>
-                {/* Editing mode */}
-                <textarea
-                  value={editingText}
-                  onChange={handleEditingTextChange}
-                  rows={3}
-                  style={{ width: '100%' }}
-                />
-                <div style={{ marginTop: '8px' }}>
-                  <button onClick={handleStopEditing}>Stop Editing</button>
-                  <button onClick={(e) => handleDeleteTask(e, task.id)} style={{ marginLeft: '8px' }}>
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div>
-                {/* Display mode */}
-                <p style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{task.text}</p>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+    <div style={styles.appContainer}>
+      <h1 style={styles.title}>Task App</h1>
+      <TaskInput input={input} setInput={setInput} addTask={addTask} />
+      <TaskList tasks={tasks} removeTask={removeTask} />
     </div>
   );
-}
+};
 
-export default App;
+export default TaskApp;
