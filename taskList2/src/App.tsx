@@ -37,6 +37,19 @@ function App() {
     return newTasks;
   };
 
+
+
+  // NEW: Reorder tasks when dragging finishes
+  const reorderTasks = (startIndex: number, endIndex: number) => {
+    const newTasks = [...tasks];
+    // Remove the dragged item
+    const [removed] = newTasks.splice(startIndex, 1);
+    // Insert it at the new position
+    newTasks.splice(endIndex, 0, removed);
+    // Update state
+    setTasks(newTasks);
+  };
+
   return (
     <>
       <h1>Tasks</h1>
@@ -50,6 +63,7 @@ function App() {
           tasks={tasks}
           updateTask={updateTask}
           deleteTask={deleteTask}
+          reorderTasks={reorderTasks}
         />
       </ul>
     </>

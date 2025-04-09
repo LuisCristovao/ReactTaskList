@@ -5,6 +5,9 @@ interface LIComponentProps {
   index: number;
   updateTask: (index: number, updatedTask: string) => void;
   deleteTask: (index: number) => void;
+  onDragStart?: (e: React.DragEvent<HTMLLIElement>) => void;
+  onDragOver?: (e: React.DragEvent<HTMLLIElement>) => void;
+  onDrop?: (e: React.DragEvent<HTMLLIElement>) => void;
 }
 
 const LIComponent: React.FC<LIComponentProps> = ({
@@ -12,6 +15,9 @@ const LIComponent: React.FC<LIComponentProps> = ({
   index,
   updateTask,
   deleteTask,
+  onDragStart,
+  onDragOver,
+  onDrop,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTask, setNewTask] = useState(task);
@@ -38,6 +44,10 @@ const LIComponent: React.FC<LIComponentProps> = ({
         <li
           
           className="cool-list"
+          draggable
+          onDragStart={onDragStart}
+          onDragOver={onDragOver}
+          onDrop={onDrop}
           //onMouseOver={() => console.log(task, index)}
           onClick={() => {
             setIsEditing(true);
