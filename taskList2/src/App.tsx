@@ -13,6 +13,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    
   }, [tasks]);
 
   const addTask = () => {
@@ -34,6 +35,7 @@ function App() {
   const deleteTask = (index: number) => {
     const newTasks= tasks.filter((_, i) => i !== index); // Remove task at index
     setTasks(newTasks)
+    window.location.reload()
     //console.log(newTasks)
     return newTasks
   };
