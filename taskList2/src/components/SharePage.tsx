@@ -16,7 +16,7 @@ const SharePage: React.FC = () => {
   const remotePeerId = queryParams.get('peerId');
 
   // Dynamically construct shareUrl
-  const baseUrl = window.location.href.split('?')[0];
+  const baseUrl = window.location.href
   const shareUrl = peerId ? `${baseUrl}?peerId=${peerId}` : `${baseUrl}?peerId=random-share-link-12345`;
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodeURIComponent(shareUrl)}`;
 
