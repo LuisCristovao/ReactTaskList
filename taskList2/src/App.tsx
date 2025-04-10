@@ -65,7 +65,7 @@ function App() {
           top: 10,
           left: 10,
           padding: "8px 16px",
-          backgroundColor: "#1a1a1a",
+          backgroundColor: "#007bff",
           color: "white",
           border: "none",
           borderRadius: "4px",
