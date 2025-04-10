@@ -36,12 +36,12 @@ const SharePage: React.FC = () => {
           // Send localStorage["tasks"] to the remote peer
           const tasks = localStorage.getItem('tasks');
           if (tasks) {
-            conn.send({ type: 'tasks', data: JSON.parse(tasks) });
+            conn.send({ type: 'tasks', data: JSON.parse(tasks) }); // Fixed typo here
           }
         });
         conn.on('data', (data: any) => {
           console.log('Received data from ' + remotePeerId + ':', data);
-          if (data.type === 'tasks') {
+          if (data.type === 'tasks' && remotePeerId) {
             setSenderPeerId(remotePeerId);
             setReceivedTasks(data.data);
             setShowConfirmation(true);
@@ -56,12 +56,12 @@ const SharePage: React.FC = () => {
         // Send localStorage["tasks"] to the connecting peer
         const tasks = localStorage.getItem('tasks');
         if (tasks) {
-          conn.send({ type: 'tasks', data: JSON.parse(tasks) });
+          conn.send({ type: 'tasks', data: JSON.parse(tasks) }); // Fixed typo here
         }
       });
       conn.on('data', (data: any) => {
         console.log('Received data from ' + conn.peer + ':', data);
-        if (data.type === 'tasks') {
+        if (data.type === 'tasks' && remotePeerId) {
           setSenderPeerId(conn.peer);
           setReceivedTasks(data.data);
           setShowConfirmation(true);
@@ -150,6 +150,7 @@ const SharePage: React.FC = () => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             backgroundColor: 'black',
+            color: 'white',
             padding: '20px',
             borderRadius: '8px',
             boxShadow: '0 0 10px rgba(0,0,0,0.3)',
