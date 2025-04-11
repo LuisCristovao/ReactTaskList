@@ -10,6 +10,7 @@ const SharePage: React.FC = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [senderPeerId, setSenderPeerId] = useState<string | null>(null);
   const [receivedTasks, setReceivedTasks] = useState<string[] | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
 
   // Extract peerId from URL query parameters
   const queryParams = new URLSearchParams(location.search);
@@ -90,6 +91,7 @@ const SharePage: React.FC = () => {
     if (receivedTasks) {
       localStorage.setItem("tasks", JSON.stringify(receivedTasks));
       console.log("Tasks accepted and stored:", receivedTasks);
+      setSuccess(true);
     }
     setShowConfirmation(false);
     setReceivedTasks(null);
@@ -101,6 +103,7 @@ const SharePage: React.FC = () => {
     setShowConfirmation(false);
     setReceivedTasks(null);
     setSenderPeerId(null);
+    setSuccess(false);
   };
 
   return (
@@ -155,9 +158,14 @@ const SharePage: React.FC = () => {
         </>
       ) : (
         // Show waiting message when remotePeerId exists (receiver)
-        !showConfirmation && (
-        <p style={{ marginTop: "20px" }}>Waiting for connection...</p>
-      )
+        !showConfirmation &&
+        !success ? (
+          
+          <p style={{ marginTop: "20px" }}>Waiting for connection...</p>
+        ):(
+          <p style={{ marginTop: "20px" }}>Tasks received with success!</p>
+        )
+
       )}
 
       {/* Confirmation Dialog */}
